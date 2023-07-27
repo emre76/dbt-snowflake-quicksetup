@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "dbt-snowflake-quicksetup"
+version = "0.1.0"
+description = "code for dbt snowflake quick setup"
+authors = ["Emre Arikan <emre_arikan@yahoo.de>"]
+readme = "README.md"
+packages = [{include = "dbt_snowflake_quicksetup"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+dbt-snowflake = "^1.5.2"
+sqlfluff = "^2.1.4"
+sqlfluff-templater-dbt = "^2.1.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

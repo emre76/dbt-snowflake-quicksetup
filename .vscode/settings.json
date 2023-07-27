@@ -1,0 +1,46 @@
+{
+  // ########### user-custom settings
+  "dbt.bigquery.keyFilename": "./token/gcp-eis-bi-vertrieb-dev-xgujbidbt.json",
+  // ########### project dependend settings. Do not modify
+  "terminal.integrated.env.windows": {
+    "DBT_BUCKET_BI_RAWDATAZONE_GCP_EIS_BI_VERTRIEB": "bi-rawdatazone-gcp-eis-bi-vertrieb-dev",
+    "DBT_ENV_GCP_PROJECT_ID": "gcp-eis-bi-vertrieb-dev",
+    "DBT_ENV_GCP_PG_BIREPO_MDM_VERTRIEB": "gcp-eis-bi-global-dev.eu.gcp_pg_birepo_mdm_vertrieb",
+    "DBT_ENV_FLAG_EPERMISSION_ENABLED": "y",
+    "DBT_ENV_HR_REPORT_ENABLED": "y"
+  },
+  "terminal.integrated.env.osx": {
+    "DBT_BUCKET_BI_RAWDATAZONE_GCP_EIS_BI_VERTRIEB": "bi-rawdatazone-gcp-eis-bi-vertrieb-dev",
+    "DBT_ENV_GCP_PROJECT_ID": "gcp-eis-bi-vertrieb-dev",
+    "DBT_ENV_GCP_PG_BIREPO_MDM_VERTRIEB": "gcp-eis-bi-global-dev.eu.gcp_pg_birepo_mdm_vertrieb",
+    "DBT_ENV_FLAG_EPERMISSION_ENABLED": "y",
+    "DBT_ENV_HR_REPORT_ENABLED": "y"
+  },
+  // ########### dbt related settings
+  "dbt.bigquery.projectId": "gcp-eis-bi-vertrieb-dev",
+  "dbt.bigquery.location": "EU",
+  "dbt.listModelsDisabled": true,
+  "sql.linter.executablePath": ".venv/bin/sqlfluff",
+  "sql.linter.ignoreParsing": true,
+  "files.associations": {
+    ".sqlfluff": "ini",
+    // https://discourse.getdbt.com/t/setting-up-vscode-to-use-with-the-dbt-cli/3291#vscode-dbt-12
+    "**/target/**": "",
+    "*.yaml": "jinja-yaml",
+    "*.yml": "jinja-yaml",
+    "*.sql": "jinja-sql"
+  },
+  "[jinja-sql]": {
+    "editor.defaultFormatter": "dorzey.vscode-sqlfluff"
+  },
+  // ########### Project dependend VSCode settings
+  "diffEditor.ignoreTrimWhitespace": true,
+  "editor.tabSize": 2,
+  // the vscode-dbt docs say you may need this
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "editor.rulers": [
+    120
+  ]
+}
