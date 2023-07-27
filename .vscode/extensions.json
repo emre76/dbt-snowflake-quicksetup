@@ -1,0 +1,9 @@
+{
+    "recommendations": [
+        "dorzey.vscode-sqlfluff",
+        "butchland.vscode-dbt-bigquery-power-user",
+        "mhutchie.git-graph",
+        "bastienboutonnet.vscode-dbt",
+        "streetsidesoftware.code-spell-checker"
+    ]
+}

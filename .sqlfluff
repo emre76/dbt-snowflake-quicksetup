@@ -1,0 +1,92 @@
+# general documentation of sqlfluff rules
+# https://docs.sqlfluff.com/en/stable/rules.html
+
+[sqlfluff]
+verbose = 1
+# auto formatter in vscode does not work with templater = dbt
+# https://github.com/sqlfluff/vscode-sqlfluff/issues/41
+templater = dbt
+dialect = snowflake
+large_file_skip_byte_limit = 20000
+max_line_length = 120
+exclude_rules = structure.column_order
+
+indent_unit = space
+tab_space_size = 2
+
+
+[sqlfluff:templater:jinja]
+apply_dbt_builtins = True
+load_macros_from_path = dbt_packages/dbt_utils/macros, dbt_packages/guj_utils/macros
+
+[sqlfluff:templater:jinja:context]
+target = dev
+
+[sqlfluff:templater:jinja:macros]
+# Macros provided as builtins for dbt projects
+dbt_ref = {% macro ref(model_ref) %}{{model_ref}}{% endmacro %}
+dbt_source = {% macro source(source_name, table) %}{{source_name}}_{{table}}{% endmacro %}
+dbt_config = {% macro config() %}{% for k in kwargs %}{% endfor %}{% endmacro %}
+dbt_var = {% macro var(variable, default='') %}item{% endmacro %}
+dbt_is_incremental = {% macro is_incremental() %}True{% endmacro %}
+
+[sqlfluff:indentation]
+# See https://docs.sqlfluff.com/en/stable/layout.html#configuring-layout-and-spacing
+# See https://docs.sqlfluff.com/en/stable/layout.html#configuring-indent-locations
+[sqlfluff:layout:type:comma]
+line_position = trailing
+
+# Operators should follow a standard for being before/after newlines.
+[sqlfluff:rules:layout.operators]
+operator_new_lines = before
+
+# nconsistent capitalisation of keywords.
+[sqlfluff:rules:capitalisation.keywords]
+capitalisation_policy = upper
+
+# Implicit/explicit aliasing of table.
+[sqlfluff:rules:aliasing.table]
+aliasing = explicit
+
+# Column expression without alias. Use explicit AS clause.
+[sqlfluff:rules:aliasing.expression]
+# Whether or not to allow a single element in the select clause to be without an alias. Must be one of [True, False].
+allow_scalar = False
+
+# Inconsistent capitalisation of unquoted identifiers.
+[sqlfluff:rules:capitalisation.identifiers]
+extended_capitalisation_policy = lower
+
+# References should be consistent in statements with a single table.
+[sqlfluff:rules:references.consistent]
+force_enable = True
+single_table_references = qualified
+
+# Keywords should not be used as identifiers.
+[sqlfluff:rules:references.keywords]
+ignore_words = name, version
+
+# Trailing commas within select clause.
+[sqlfluff:rules:convention.select_trailing_comma]
+select_clause_trailing_comma = forbid
+
+# Join/From clauses should not contain subqueries. Use CTEs instead.
+[sqlfluff:rules:structure.subquery]
+forbid_subquery_in = both
+
+# Join clauses should be fully qualified.
+[sqlfluff:rules:ambiguous.join]
+fully_qualify_join_types = both
+
+# Statements must end with a semi-colon.
+[sqlfluff:rules:convention.terminator]
+multiline_newline = False
+require_final_semicolon = False
+
+# Inconsistent column references in GROUP BY/ORDER BY clauses.
+[sqlfluff:rules:ambiguous.column_references]
+group_by_and_order_by_style = implicit
+
+# Inconsistent capitalisation of datatypes.
+[sqlfluff:rules:capitalisation.types]
+extended_capitalisation_policy = lower
